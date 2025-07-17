@@ -56,15 +56,9 @@ doctype_js = {
 fixtures = [
     {
         "dt": "Custom Field",
-        "filters": [
-            ["module", "=", "clean_plus"]
-        ]
     },
     {
-        "dt": "Client Script",
-        "filters": [
-            ["module", "=", "clean_plus"]
-        ]
+     "dt": "Client Script",
     }
 ]
 
