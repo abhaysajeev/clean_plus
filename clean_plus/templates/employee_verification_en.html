@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+        .letterhead {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .letterhead h2 {
+            margin: 0;
+            font-size: 16px;
+        }
+        .table-summary, .table-summary td, .table-summary th {
+            border: 1px solid #000;
+            border-collapse: collapse;
+            padding: 6px;
+        }
+        .table-summary {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .footer {
+            margin-top: 40px;
+        }
+        .employee-details {
+            margin-top: 30px;
+        }
+        .emp-card {
+            border: 1px solid #000;
+            padding: 10px;
+            display: flex;
+            margin-bottom: 15px;
+        }
+        .emp-info {
+            flex: 1;
+        }
+        .emp-photo {
+            width: 120px;
+            text-align: right;
+        }
+        .emp-photo img {
+            width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Letterhead -->
+    <div class="letterhead">
+        <h2>CleanPlus Industries Pvt. Ltd.</h2>
+        <p>
+            Plot No A-15, Thumba, Kazhakuttam, Thiruvananthapuram - 695582<br>
+            (Kinfra International Apparel Parks)<br>
+            Tel :<br>
+            Email :<br>
+            Date : {{ frappe.utils.formatdate(frappe.utils.nowdate()) }}
+        </p>
+    </div>
+
+    <!-- Subject & Address -->
+    <p>
+        To:<br>
+        The Station House Officer<br>
+        Kazhakuttom<br>
+        Thiruvananthapuram - 695582<br><br>
+        <strong>Subject:</strong> Migrant Workers Details
+    </p>
+
+    <p>
+        Sir,<br>
+        Kindly note that the following migrant workers who joined/left the company.
+    </p>
+
+    <!-- Summary Table -->
+    <table class="table-summary">
+        <tr>
+            <th>Name</th>
+            <th>Aadhaar Number</th>
+            <th>New Join/Relieving</th>
+            <th>Referral Code</th>
+        </tr>
+        {% for emp in employees %}
+        <tr>
+            <td>{{ emp.employee_name }}</td>
+            <td>{{ emp.custom_aadhaar_number or '' }}</td>
+            <td>Police Verification For Joining</td>
+            <td>{{ emp.custom_referral_code }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Footer -->
+    <p>
+        We kindly request your good office to amend the records at your end accordingly.<br><br>
+        Yours faithfully,<br>
+        For Cleanplus Apparel Industries Pvt Ltd
+    </p>
+
+    <p>
+        Signature: ___________<br>
+        Name: ___________
+    </p>
+
+    <!-- Employee Details with Photos -->
+    <div class="employee-details">
+        <h3>Employee Details</h3>
+        {% for emp in employees %}
+        <div class="emp-card">
+            <div class="emp-info">
+                <p><strong>Code:</strong> {{ emp.custom_referral_code }}</p>
+                <p><strong>Name:</strong> {{ emp.employee_name }}</p>
+                <p><strong>Address:</strong> {{ emp.custom_address or 'N/A' }}</p>
+                <p><strong>Mobile:</strong> {{ emp.cell_number or 'N/A' }}</p>
+            </div>
+            <div class="emp-photo">
+                {% if emp.image_base64 %}
+                    <img src="{{ emp.image_base64 }}" alt="Photo">
+                {% else %}
+                    <p>No Photo</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

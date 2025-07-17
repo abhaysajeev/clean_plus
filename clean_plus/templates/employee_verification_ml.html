@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Verification </title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      margin: 40px;
+      line-height: 1.6;
+    }
+
+    /* Header Section */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      font-size: 13px; /* English font smaller */
+      line-height: 1.4;
+    }
+
+    .header-text {
+      max-width: 70%;
+    }
+
+    .logo {
+      width: 300px;
+      text-align: right;
+    }
+
+    .logo img {
+      width: 250px;
+      height: auto;
+    }
+
+    .date {
+      font-size: 14px;
+      margin-top: 140px;
+      margin-right: 0;
+      margin-bottom: 30px;
+      margin-left: 0;
+
+    }
+
+    .address {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .subject {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 25px 0 15px;
+    }
+
+    p {
+      font-size: 18px;
+      margin: 6px 0;
+    }
+
+    /* Summary Table (optional) */
+    .table-summary {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 25px;
+      margin-bottom: 30px;
+    }
+
+    .table-summary th,
+    .table-summary td {
+      border: 1px solid #000;
+      padding: 8px;
+      text-align: left;
+      font-size: 18px;
+    }
+
+    .signature, .copy, .footer {
+      margin-top: 30px;
+      font-size: 18px;
+    }
+
+    .footer {
+      font-size: 13px;
+    }
+
+    .employee-details {
+      margin-top: 40px;
+    }
+
+    .emp-card {
+      border: 1px solid #000;
+      padding: 12px;
+      display: flex;
+      margin-bottom: 20px;
+      page-break-inside: avoid;
+    }
+
+    .emp-info {
+      flex: 1;
+    }
+
+    .emp-photo {
+      width: 130px;
+      text-align: right;
+    }
+
+    .emp-photo img {
+      width: 110px;
+      height: auto;
+    }
+
+    h3 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-text">
+      <strong>Cleanplus Industries Pvt. Ltd.</strong><br>
+      (Formerly: CleanPlus Apparel Industries Pvt. Ltd.)<br>
+      Plot A-15, KINFRA International Apparel Parks<br>
+      Kazhakuttom, St. Xavier's College P.O., Thiruvananthapuram 695 586, Kerala<br>
+      Ph: 0471-3501200 / 201 / 202<br>
+      Email: info@cleanplusgroup.com | Web: www.cleanplusgroup.com
+    </div>
+    <div class="logo">
+      <!-- Replace this with actual logo image path or base64 -->
+      <img src="/assets/clean_plus/images/clean_plus_logo.jpeg" alt="Company Logo">
+    </div>
+  </div>
+
+  <!-- Date -->
+  <div class="date"> Date: {{ frappe.utils.formatdate(frappe.utils.nowdate()) }}</div>
+
+
+  <!-- Recipient Info -->
+  <div class="address">
+    To:<br>
+    <strong>The Station House Officer</strong><br>
+    Kazhakuttom<br>
+    Thiruvananthapuram 695582
+  </div>
+
+  <!-- Subject -->
+  <div class="subject">വിഷയം: അന്യസംസ്ഥാന തൊഴിലാളികളുടെ വിവരങ്ങൾ</div>
+
+  <!-- Letter Body in Malayalam -->
+  <p>
+    സർ,<br>
+    ഈ സ്ഥാപനത്തിൽ ജോലി ചെയ്യുന്ന അന്യസംസ്ഥാന തൊഴിലാളികളുടെ വിവരങ്ങൾ
+    അങ്ങയുടെ ഓഫീസിൽ നൽകിയിട്ടുള്ളതാണ്. ഓരോ തവണ തൊഴിലാളികൾ നാട്ടിൽ
+    പോകുമ്പോഴും തിരികെ വരുമ്പോഴും അങ്ങയുടെ ഓഫീസിൽ അറിയിക്കാറുണ്ട്.
+    അതുപോലെ പുതിയ തൊഴിലാളികളെ ജോലിക്ക് എടുക്കുമ്പോഴും വിവരങ്ങൾ
+    നൽകാറുണ്ട്. ഇതോടൊപ്പം പുതുതായി വന്ന തൊഴിലാളികളുടെയും
+    ലീവിൽ പോയ തൊഴിലാളികളുടെയും ജോലി മതിയാക്കി പോയ
+    തൊഴിലാളികളുടെയും വിവരങ്ങൾ ചേർക്കുന്നു. അങ്ങയുടെ റെക്കോർഡിലാക്കി
+    സൂക്ഷിക്കണമെന്ന് അഭ്യർത്ഥിക്കുന്നു.
+  </p>
+
+  <!-- Optional Summary Table (uncomment if needed) -->
+  <!--
+  <table class="table-summary">
+    <tr>
+      <th>പേര്</th>
+      <th>ആധാർ നമ്പർ</th>
+      <th>പുതിയ ജോലിചേരൽ/റിലീവിങ്</th>
+      <th>റഫറൽ കോഡ്</th>
+    </tr>
+    {% for emp in employees %}
+    <tr>
+      <td>{{ emp.custom_full_name_malayalam }}</td>
+      <td>{{ emp.custom_aadhaar_number or '' }}</td>
+      <td>ജോയിനിംഗിനായുള്ള പോലീസ് വെരിഫിക്കേഷൻ</td>
+      <td>{{ emp.custom_referral_code }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  -->
+
+  <!-- Signature -->
+  <div class="signature">
+    വിശ്വസ്തതയോടെ,<br><br>
+    ചെല്ലപ്പൻ എം എൻ<br>
+    ചെയർമാൻ/മാനേജിങ് ഡയറക്ടർ<br>
+    ക്ലീൻപ്ലസ് അപ്പാരൽ ഇൻഡസ്ട്രീസ് പ്രൈവറ്റ് ലിമിറ്റഡ്
+  </div>
+
+  <!-- Copy -->
+  <div class="copy">
+    കോപ്പി: മാനേജിങ് ഡയറക്ടർ<br>
+    കിൻഫ്ര ഇന്റർനാഷണൽ അപ്പാരൽ പാർക്ക്
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    CIN: U96010KL2001PTC014672 | Udyam: KL-12-00005587 | GST: 32AAECA2329P1Z0
+  </div>
+
+  <!-- Page Break Before Employee Details -->
+  <div class="page-break"></div>
+
+  <!-- Employee Details Section -->
+  <div class="employee-details">
+    <h3>തൊഴിലാളികളുടെ വിശദാംശങ്ങൾ</h3>
+    {% for emp in employees %}
+    <div class="emp-card">
+      <div class="emp-info">
+        <p><strong>പേര് :</strong> {{ emp.employee_name }}</p>
+        <p><strong>വിലാസം :</strong> {{ emp.current_address or 'address not found' }}</p>
+        <p><strong>ആധാർ നമ്പർ :</strong> {{ emp.custom_aadhaar_number or '' }}</p>
+      </div>
+      <div class="emp-photo">
+        {% if emp.image_base64 %}
+        <img src="{{ emp.image_base64 }}" alt="ചിത്രം">
+        {% else %}
+        <p>Image not found</p>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</body>
+</html>

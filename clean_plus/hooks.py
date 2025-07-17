@@ -45,6 +45,30 @@ app_license = "mit"
 # include js in doctype views
 # doctype_js = {"doctype" : "public/js/doctype.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
+
+doctype_list_js = {
+    "Employee": "public/js/employee_list.js"
+}
+doctype_js = {
+    "Employee": "public/js/employee_form.js"
+}
+
+fixtures = [
+    {
+        "dt": "Custom Field",
+        "filters": [
+            ["module", "=", "clean_plus"]
+        ]
+    },
+    {
+        "dt": "Client Script",
+        "filters": [
+            ["module", "=", "clean_plus"]
+        ]
+    }
+]
+
+
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
