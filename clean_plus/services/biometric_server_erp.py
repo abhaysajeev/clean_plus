@@ -37,16 +37,27 @@ def add_checkin(punchingcode, employee_name, time, device_id):
     # Generate name using naming series (e.g., CHKIN-00001)
     name = make_autoname('CHKIN-.#####')
 
+    device_doc = frappe.get_single("Biometric Device Mapping")
+    # Search in the child table
+    location = None
+    try:
+        for row in device_doc.table_sgvh:
+            if row.serial_number == device_id:
+                location = row.location
+                break 
+    except Exception as e:
+        frappe.log_error(f"Error while fetching device location: {str(e)}", "Biometric Lookup Error")
+
     # Insert using SQL
     frappe.db.sql("""
         INSERT INTO `tabEmployee Checkin`
         (name, creation, modified, modified_by, owner, docstatus, idx,
-         employee, employee_name, time, device_id, log_type)
+         employee, employee_name, time, device_id, log_type,custom_device_location)
         VALUES (%s, NOW(), NOW(), %s, %s, 0, 0,
-         %s, %s, %s, %s, %s)
+         %s, %s, %s, %s, %s, %s)
     """, (
         name, frappe.session.user, frappe.session.user,
-        employee_id, full_name, checkin_time, device_id, log_type
+        employee_id, full_name, checkin_time, device_id, log_type,location
     ))
 
     return {

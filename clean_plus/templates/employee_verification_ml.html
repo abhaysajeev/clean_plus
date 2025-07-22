@@ -190,6 +190,10 @@
   <!-- Signature -->
   <div class="signature">
     വിശ്വസ്തതയോടെ,<br><br>
+    <br>
+    <br>
+    <br>
+    <br>
     ചെല്ലപ്പൻ എം എൻ<br>
     ചെയർമാൻ/മാനേജിങ് ഡയറക്ടർ<br>
     ക്ലീൻപ്ലസ് അപ്പാരൽ ഇൻഡസ്ട്രീസ് പ്രൈവറ്റ് ലിമിറ്റഡ്
@@ -200,7 +204,9 @@
     കോപ്പി: മാനേജിങ് ഡയറക്ടർ<br>
     കിൻഫ്ര ഇന്റർനാഷണൽ അപ്പാരൽ പാർക്ക്
   </div>
-
+    <br>
+    <br>
+    <br>
   <!-- Footer -->
   <div class="footer">
     CIN: U96010KL2001PTC014672 | Udyam: KL-12-00005587 | GST: 32AAECA2329P1Z0
@@ -215,9 +221,10 @@
     {% for emp in employees %}
     <div class="emp-card">
       <div class="emp-info">
-        <p><strong>പേര് :</strong> {{ emp.employee_name }}</p>
-        <p><strong>വിലാസം :</strong> {{ emp.current_address or 'address not found' }}</p>
-        <p><strong>ആധാർ നമ്പർ :</strong> {{ emp.custom_aadhaar_number or '' }}</p>
+        <p><strong style="font-size: 18px;">പേര് :</strong> <span style="font-size: 18px;">{{ emp.custom_full_name_malayalam or emp.employee_name }}</span></p>
+        <p><strong style="font-size: 18px;">വിലാസം :</strong> <span style="font-size: 14px;">{{ emp.current_address or 'address not found' }}</span></p>
+        <p><strong style="font-size: 18px;">ആധാർ നമ്പർ :</strong> <span style="font-size: 12px;">{{ emp.custom_aadhaar_number or '' }}</span></p>
+
       </div>
       <div class="emp-photo">
         {% if emp.image_base64 %}

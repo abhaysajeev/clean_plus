@@ -1,0 +1,48 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-07-22 10:42:48.220085",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "device_mapping_section",
+  "table_sgvh"
+ ],
+ "fields": [
+  {
+   "fieldname": "device_mapping_section",
+   "fieldtype": "Section Break",
+   "label": "Device Mapping"
+  },
+  {
+   "fieldname": "table_sgvh",
+   "fieldtype": "Table",
+   "options": "Biometric Device Item"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-07-22 10:50:35.665838",
+ "modified_by": "Administrator",
+ "module": "Clean Plus",
+ "name": "Biometric Device Mapping",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

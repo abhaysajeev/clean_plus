@@ -25,7 +25,7 @@ app_license = "mit"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/clean_plus/css/clean_plus.css"
+# app_include_css = "/assets/clean_plus/css/splash_logo.css"
 # app_include_js = "/assets/clean_plus/js/clean_plus.js"
 
 # include js, css files in header of web template
@@ -56,10 +56,21 @@ doctype_js = {
 fixtures = [
     {
         "dt": "Custom Field",
+         "filters": [["module", "=", "Clean Plus"]]
     },
     {
      "dt": "Client Script",
-    }
+      "filters": [["module", "=", "Clean Plus"]]
+    },
+        {
+        "dt": "DocType",
+        "filters": [["module", "=", "Clean Plus"]]
+    },
+    {
+    "dt": "Property Setter",
+    "filters": [["module", "=", "Clean Plus"]]
+}
+
 ]
 
 

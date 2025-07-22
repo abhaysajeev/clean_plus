@@ -12,7 +12,7 @@ def custom_employee_pdf(names, print_lang):
     employees = frappe.get_all(
         "Employee",
         filters={"name": ["in", names]},
-        fields=["name", "employee_name", "custom_aadhaar_number", "custom_referral_code", "image","cell_number", "custom_full_name_malayalam"]
+        fields=["name", "current_address", "employee_name", "custom_aadhaar_number", "custom_referral_code", "image","cell_number", "custom_full_name_malayalam"]
     )
 
     # Convert images to base64
