@@ -1,6 +1,37 @@
 frappe.ui.form.on('Employee', {
+
+        validate: function(frm) {
+        const html_field = frm.fields_dict['custom_deductions'];
+        if (!html_field || !html_field.wrapper) return;
+
+        // Get selected checkbox values
+        const selected = [...html_field.wrapper.querySelectorAll('input[name="deductions"]:checked')]
+            .map(el => el.value);
+
+        // Join and save to hidden custom field
+        frm.set_value('custom_selected_deductions', selected.join(', '));
+    },
+
+
     refresh(frm) {
+
+        render_deductions(frm); //for loading Dynamic Radio Buttons in Monthly deductions
+
+            const malayalam_fields = [
+            'custom_first_name_malayalam',
+            'custom_last_name_malayalam',
+            'custom_malayalam_translator'
+    ];
+
+            malayalam_fields.forEach(fieldname => {
+            const wrapper = frm.fields_dict[fieldname]?.$wrapper;
+            if (wrapper) {
+                wrapper.find('input, textarea').css('font-size', '18px');
+            }
+            });
+
         // Attach popup buttons to Malayalam fields
+
         bind_field_popup(frm, 'custom_first_name_malayalam', 'first_name');
         bind_field_popup(frm, 'custom_last_name_malayalam', 'last_name');
         bind_field_popup(frm, 'custom_malayalam_translator', 'custom_malayalam_converter');
@@ -122,6 +153,56 @@ function show_popup_above($field_input, frm, mal_fieldname, source_fieldname) {
     });
 }
 
+
+function render_deductions(frm) {
+    frappe.call({
+        method: "frappe.client.get_list",
+        args: {
+            doctype: "Salary Component",
+            filters: { type: "Deduction" },
+            fields: ["name"]
+        },
+        callback: function(r) {
+            const html_field = frm.fields_dict['custom_deductions'];
+            if (!html_field || !html_field.wrapper) return;
+
+            // Read from the correct field name that matches validate function
+            const selected = (frm.doc.custom_selected_deductions || '').split(',').map(s => s.trim());
+
+            let html = `<div style="padding: 4px 0;">`;
+            r.message.forEach(comp => {
+                const isChecked = selected.includes(comp.name) ? 'checked' : '';
+                html += `
+                    <div style="margin: 4px 0;">
+                        <label>
+                            <input type="checkbox" name="deductions" value="${comp.name}" ${isChecked}>
+                            ${comp.name}
+                        </label>
+                    </div>
+                `;
+            });
+            html += `</div>`;
+
+            html_field.wrapper.innerHTML = html;
+
+            // Add event listeners to update the hidden field immediately
+            html_field.wrapper.querySelectorAll('input[name="deductions"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const selected = [...html_field.wrapper.querySelectorAll('input[name="deductions"]:checked')]
+                        .map(el => el.value);
+                    frm.set_value('custom_selected_deductions', selected.join(', '));
+                });
+            });
+        }
+    });
+}
+function save_selected_deductions(frm) {
+    const wrapper = frm.fields_dict['custom_selected_deductions'].wrapper;
+    const selected = [...wrapper.querySelectorAll('input[name="deductions"]:checked')]
+        .map(el => el.value);
+    
+    frm.set_value('selected_deductions', selected.join(','));
+}
 
 // Call server to get transliterated name & suggestions
 function translate_name(frm, triggered_by_field_click = false, source_fieldname, target_fieldname = '') {
