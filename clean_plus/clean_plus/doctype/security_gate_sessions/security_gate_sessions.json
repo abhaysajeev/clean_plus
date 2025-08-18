@@ -1,42 +1,46 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2025-07-22 10:44:18.129937",
+ "creation": "2025-08-13 11:37:15.571621",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "serial_number",
-  "location",
-  "database_table"
+  "time",
+  "log_type",
+  "session_duration"
  ],
  "fields": [
   {
-   "fieldname": "serial_number",
-   "fieldtype": "Data",
+   "fieldname": "time",
+   "fieldtype": "Time",
    "in_list_view": 1,
-   "label": "Serial Number"
+   "label": "Time"
   },
   {
-   "fieldname": "location",
-   "fieldtype": "Data",
+   "fieldname": "log_type",
+   "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "Location"
+   "label": "Log Type",
+   "options": "\nIN\nOUT"
   },
   {
-   "fieldname": "database_table",
+   "depends_on": "eval:doc.log_type == \"OUT\"",
+   "fieldname": "session_duration",
    "fieldtype": "Data",
-   "label": "Database Table"
+   "in_list_view": 1,
+   "label": "Session Duration",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-08-13 11:40:33.627570",
+ "modified": "2025-08-13 11:41:46.127272",
  "modified_by": "Administrator",
  "module": "Clean Plus",
- "name": "Biometric Device Item",
+ "name": "Security Gate Sessions",
  "owner": "Administrator",
  "permissions": [],
  "row_format": "Dynamic",

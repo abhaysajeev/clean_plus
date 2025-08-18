@@ -71,8 +71,15 @@ fixtures = [
     {
     "dt": "Property Setter",
     "filters": [["module", "=", "Clean Plus"]]
-    }
-
+    },
+    {
+     "dt": "Workspace",
+     "filters": [["module", "=", "Clean Plus"]]   
+    },
+    {
+     "dt": "Server Script",
+      "filters": [["module", "=", "Clean Plus"]]
+    },
 ]
 
 
@@ -168,13 +175,11 @@ fixtures = [
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Salary Slip": {
+		"before_save": "clean_plus.services.salaryslip.fetch_total_overtime"
+	}
+}
 
 # Scheduled Tasks
 # ---------------
