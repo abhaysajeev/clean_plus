@@ -1,0 +1,102 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "WHA-.YYYY.-.#####",
+ "creation": "2025-08-20 16:15:11.725803",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "run_date",
+  "alert_type",
+  "threshold_hours",
+  "total_employees_below_threshold",
+  "status",
+  "working_hours_alert_detail"
+ ],
+ "fields": [
+  {
+   "default": "Today",
+   "fieldname": "run_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Run Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "alert_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Alert Type",
+   "options": "Daily\nWeekly\nMonthly",
+   "reqd": 1
+  },
+  {
+   "fieldname": "threshold_hours",
+   "fieldtype": "Float",
+   "label": "Threshold Hours",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_employees_below_threshold",
+   "fieldtype": "Int",
+   "label": "Total Employees Below Threshold",
+   "read_only": 1
+  },
+  {
+   "default": "New",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "New\nViewed\nProcessed"
+  },
+  {
+   "fieldname": "working_hours_alert_detail",
+   "fieldtype": "Table",
+   "label": "Alert Details",
+   "options": "Working Hours Alert Detail"
+  }
+ ],
+ "links": [],
+ "modified": "2025-08-20 16:25:31.447982",
+ "modified_by": "Administrator",
+ "module": "Clean Plus",
+ "name": "Working Hours Alert",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guest",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "route": "working-hours-alert",
+ "row_format": "Dynamic",
+ "show_name_in_global_search": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

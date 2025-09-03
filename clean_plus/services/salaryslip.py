@@ -42,3 +42,16 @@ def fetch_total_overtime(slip, method=None):
     #     },
     #     user=frappe.session.user
     # )
+
+def calculate_unofficial_outpass_hours(doc, method=None):
+    total_hours = frappe.db.sql("""
+        SELECT SUM(total_duration)
+        FROM `tabOutpass Request`
+        WHERE employee = %s
+          AND docstatus = 1
+          AND `request_status` = 'Approved'
+          AND purpose_type = 'Unofficial'
+          AND `date` BETWEEN %s AND %s
+    """, (doc.employee, doc.start_date, doc.end_date))[0][0] or 0
+
+    doc.custom_unofficial_outpass_hours = total_hours

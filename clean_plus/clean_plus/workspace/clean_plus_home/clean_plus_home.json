@@ -1,7 +1,7 @@
 {
  "charts": [],
- "content": "[{\"id\":\"kb3XPLg8lb\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\",\"col\":12}},{\"id\":\"cvkpwUXobJ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee\",\"col\":3}},{\"id\":\"5y4HHjz5uS\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Attendance Dashboard\",\"col\":3}},{\"id\":\"d_KVM1gsf9\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"mo3XJ0cNFK\",\"type\":\"card\",\"data\":{\"card_name\":\"Salary\",\"col\":4}},{\"id\":\"MBynaWwhus\",\"type\":\"card\",\"data\":{\"card_name\":\"Employee Attendance\",\"col\":4}},{\"id\":\"gU9_4DqCnk\",\"type\":\"card\",\"data\":{\"card_name\":\"Leave\",\"col\":4}}]",
- "creation": "2025-08-18 13:13:17.073848",
+ "content": "[{\"id\":\"kb3XPLg8lb\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\",\"col\":12}},{\"id\":\"cvkpwUXobJ\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee\",\"col\":3}},{\"id\":\"5y4HHjz5uS\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Attendance Dashboard\",\"col\":3}},{\"id\":\"d_KVM1gsf9\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"mo3XJ0cNFK\",\"type\":\"card\",\"data\":{\"card_name\":\"Salary\",\"col\":4}},{\"id\":\"SFUbad--zS\",\"type\":\"card\",\"data\":{\"card_name\":\"Working Hours Tracking\",\"col\":4}},{\"id\":\"MBynaWwhus\",\"type\":\"card\",\"data\":{\"card_name\":\"Employee Attendance\",\"col\":4}},{\"id\":\"gU9_4DqCnk\",\"type\":\"card\",\"data\":{\"card_name\":\"Leave\",\"col\":4}}]",
+ "creation": "2025-08-21 17:15:20.251708",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
@@ -346,9 +346,38 @@
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Working Hours Tracking",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Working Hours Deficit",
+   "link_count": 0,
+   "link_to": "Working Hours Alert",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Memo References",
+   "link_count": 0,
+   "link_to": "Memo Reference",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2025-08-18 13:13:36.600903",
+ "modified": "2025-09-01 11:13:10.200136",
  "modified_by": "Administrator",
  "module": "Clean Plus",
  "name": "Clean Plus Home",

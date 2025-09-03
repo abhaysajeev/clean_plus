@@ -1,0 +1,77 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-09-01 10:34:09.085348",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "out_checkin",
+  "from",
+  "column_break_plwe",
+  "in_checkin",
+  "to",
+  "section_break_ccom",
+  "duration"
+ ],
+ "fields": [
+  {
+   "fieldname": "out_checkin",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "OUT Checkin",
+   "options": "Employee Checkin"
+  },
+  {
+   "fieldname": "column_break_plwe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "in_checkin",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "IN Checkin",
+   "options": "Employee Checkin"
+  },
+  {
+   "fetch_from": "out_checkin.time",
+   "fieldname": "from",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "From",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "in_checkin.time",
+   "fieldname": "to",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "To",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_ccom",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "duration",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Duration"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-09-01 10:38:35.248095",
+ "modified_by": "Administrator",
+ "module": "Clean Plus",
+ "name": "Outpass Intervals",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

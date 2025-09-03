@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- SECTION 1: Document Setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Form</title>
+    
+    <!-- SECTION 2: Basic Styling (Optional) -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        
+        .form-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- SECTION 3: Main Content -->
+    <div class="form-container">
+        <h2>Simple Form Example</h2>
+        
+        <!-- SECTION 4: The Form Structure -->
+        <form action="#" method="post">
+            <!-- Text input field -->
+            <label for="userText">Enter your text:</label>
+            <input type="text" 
+                   id="userText" 
+                   name="userText" 
+                   placeholder="Type something here..." 
+                   required>
+            
+            <!-- Submit button -->
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <!-- SECTION 5: JavaScript (Optional - for handling form submission) -->
+    <script>
+        // This prevents the form from actually submitting and shows what was entered
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop the form from submitting
+            
+            const textValue = document.querySelector('#userText').value;
+            alert('You entered: ' + textValue);
+        });
+    </script>
+</body>
+</html>

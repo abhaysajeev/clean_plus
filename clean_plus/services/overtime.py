@@ -22,6 +22,7 @@ def _processed_ot_data(ot_data,ot_date):
         "employee_name": None,
         "reports_to": None,
         "department": None,
+        "image": None,
         "first_in": None,
         "last_out": None,
         "total_overtime": None,
@@ -36,6 +37,7 @@ def _processed_ot_data(ot_data,ot_date):
                 "employee_name": row['employee_name'],
                 "reports_to": row['reports_to'],
                 "department": row['department'],
+                "image": row['image'],
                 "total_overtime": row['total_overtime']
                 })
                 
@@ -76,25 +78,26 @@ def _processed_ot_data(ot_data,ot_date):
 def _get_employee_overtime(ot_date):
     try:
         query = """
-            SELECT 
-            oc.date,
-            oc.employee,
-            oc.name as parent_id,
-            oc.total_overtime as total_overtime,
-            em.reports_to,
-            em.department,
-            em.employee_name,
-            os.log_type,
-            os.session_duration,
-            os.idx as session_order,
-            os.time as session_time
-        FROM `tabOvertime Checkin` AS oc
-        JOIN `tabEmployee` AS em ON oc.employee = em.name
-        LEFT JOIN `tabOvertime Sessions` AS os ON os.parent = oc.name
-        WHERE DATE(oc.date) = %(ot_date)s
-        AND em.status = 'Active'
-        ORDER BY oc.employee, os.idx
-        """
+                    SELECT 
+                    oc.date,
+                    oc.employee,
+                    oc.name as parent_id,
+                    oc.total_overtime as total_overtime,
+                    em.reports_to,
+                    em.department,
+                    em.employee_name,
+                    em.image,
+                    os.log_type,
+                    os.session_duration,
+                    os.idx as session_order,
+                    os.time as session_time
+                FROM `tabOvertime Checkin` AS oc
+                JOIN `tabEmployee` AS em ON oc.employee = em.name
+                LEFT JOIN `tabOvertime Sessions` AS os ON os.parent = oc.name
+                WHERE DATE(oc.date) = %(ot_date)s
+                AND em.status = 'Active'
+                ORDER BY oc.employee, os.idx
+            """
         params={"ot_date":ot_date}
         ot_data=frappe.db.sql(query,params,as_dict=True)
 

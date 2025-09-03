@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Form</title>
+    <style>
+        /* Basic Styling Section */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <!-- HTML Form Structure Section -->
+    <h1>Employee Registration Form</h1>
+    
+    <form id="employeeForm">
+        <div class="form-group">
+            <label for="employeeName">Employee Name:</label>
+            <input type="text" id="employeeName" name="employeeName" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="designation">Designation:</label>
+            <select id="designation" name="designation" required>
+                <option value="">Select Designation</option>
+                <!-- Options will be loaded dynamically -->
+            </select>
+        </div>
+        
+        <button type="submit">Submit</button>
+    </form>
+    
+    <!-- Message display area -->
+    <div id="messageArea"></div>
+
+    <script>
+        // DOM Loading and Initialization Section
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDesignations();
+            setupFormSubmission();
+        });
+
+        // Configuration Section
+        // Since HTML is served from Frappe, use relative URLs
+        const API_BASE_URL = '';
+        
+        // API Functions Section
+        async function loadDesignations() {
+            try {
+                console.log('Loading designations...');
+                
+                // Use relative URL since HTML is served from Frappe
+                const apiUrl = '/api/method/clean_plus.services.employee_form.get_designations';
+                
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('Designations loaded:', data);
+                
+                populateDesignationDropdown(data);
+                
+            } catch (error) {
+                console.error('Error loading designations:', error);
+                showMessage('Error loading designations. Please refresh the page.', 'error');
+            }
+        }
+
+        // UI Helper Functions Section
+        function populateDesignationDropdown(data) {
+            const selectElement = document.getElementById('designation');
+            
+            // Clear existing options except the first placeholder
+            selectElement.innerHTML = '<option value="">Select Designation</option>';
+            
+            // Assuming the API returns data in format: {message: [...]} or direct array
+            const designations = data.message || data;
+            
+            if (Array.isArray(designations)) {
+                designations.forEach(designation => {
+                    const option = document.createElement('option');
+                    // Handle different data formats - adjust based on your API response
+                    option.value = designation.name || designation;
+                    option.textContent = designation.title || designation.name || designation;
+                    selectElement.appendChild(option);
+                });
+            }
+        }
+
+        function showMessage(message, type) {
+            const messageArea = document.getElementById('messageArea');
+            messageArea.innerHTML = `<div class="message ${type}">${message}</div>`;
+            
+            // Auto-hide message after 5 seconds
+            setTimeout(() => {
+                messageArea.innerHTML = '';
+            }, 5000);
+        }
+
+        // Form Submission Section
+        function setupFormSubmission() {
+            const form = document.getElementById('employeeForm');
+            
+            form.addEventListener('submit', async function(event) {
+                event.preventDefault(); // Prevent default form submission
+                
+                await submitEmployeeForm();
+            });
+        }
+
+        async function submitEmployeeForm() {
+            try {
+                // Collect form data
+                const formData = {
+                    employeeName: document.getElementById('employeeName').value,
+                    designation: document.getElementById('designation').value
+                };
+                
+                console.log('Submitting employee data:', formData);
+                
+                // Use relative URL since HTML is served from Frappe
+                const apiUrl = '/api/method/clean_plus.services.employeeform.add_employee';
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                console.log('Employee added successfully:', result);
+                
+                showMessage('Employee added successfully!', 'success');
+                
+                // Reset form after successful submission
+                document.getElementById('employeeForm').reset();
+                
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                showMessage('Error adding employee. Please try again.', 'error');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -53,6 +53,7 @@ doctype_list_js = {
 }
 doctype_js = {
     "Employee": "public/js/employee_form.js"
+
 }
 
 fixtures = [
@@ -80,6 +81,18 @@ fixtures = [
      "dt": "Server Script",
       "filters": [["module", "=", "Clean Plus"]]
     },
+    {
+     "dt": "Role Profile",
+     "filters": [["name", "=", "Management"]]
+    },
+    {
+        "dt": "Role Profile",
+        "filters": [["role_profile", "=", "Management"]]
+    },    
+    {
+        "dt": "Workflow",
+        "filters": [["document_type", "=", "Outpass Request"]]
+    }
 ]
 
 
@@ -177,8 +190,15 @@ fixtures = [
 
 doc_events = {
 	"Salary Slip": {
-		"before_save": "clean_plus.services.salaryslip.fetch_total_overtime"
-	}
+		"before_save": "clean_plus.services.salaryslip.fetch_total_overtime",
+        "before_save": "clean_plus.services.salaryslip.calculate_unofficial_outpass_hours"
+	},
+    "Attendance": {
+        "validate": "clean_plus.services.attendance_utils.update_outpass_minutes"
+    },
+    "Outpass Request": {
+        "on_submit": "clean_plus.services.movements.on_submit"
+    }
 }
 
 # Scheduled Tasks
